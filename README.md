@@ -8,12 +8,10 @@
 **2. Demo Link**
 **3. Contributors**
 **4. How to use**
-**5. License**
 
 ------------------------------------------------------------------------------------------------------------------------
 ## Description
 **In working of this website you can choose the image from the storage of your phone or PC to determine the authenticity of that particular medicine.**
-
 **{As this is an small working prototype , later on it will also help you to directly scan the image of that particular medicine from your phone's camera.}**
 
 ---------------------------------------------------------------------------------------------------------------------------
@@ -27,9 +25,12 @@
 ------------------------------------------------------------------------------------------------------------------------
 
 ## How to Use 
-**STEP-1 : Click on Scan medicine now button on the front page of our Website**
-**STEP-2 : Choose the image of the medicine you want to scan from your PC, then click on Scan Now**
-**STEP-3 : The results regarding the medicines will be displayed on your screen.**
+**STEP1: Click on Scan medicine now button on the front page of our Website** 
+
+**STEP2: Choose the image of the medicine you want to scan from your PC, then click on Scan Now** 
+
+**STEP3: The results regarding the medicines will be displayed on your screen.** 
+
 ![Screenshot (253)](https://user-images.githubusercontent.com/78435208/120807097-35ce1880-c565-11eb-9fa5-99e624742626.png)
 ![Screenshot (254)](https://user-images.githubusercontent.com/78435208/120807114-39619f80-c565-11eb-9a8e-b0e58744d3fa.png)
 ![Screenshot (255)](https://user-images.githubusercontent.com/78435208/120807117-39fa3600-c565-11eb-9bf5-20222fbea1c1.png)
