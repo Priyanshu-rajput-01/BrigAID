@@ -113,6 +113,25 @@ def decord_text(img):
 ################################################################################################################################################
 
 ################################################################################################################################################
+def decord_text_color(img):
+    image = img
+    box = pytesseract.image_to_data(image)
+    string =pytesseract.image_to_string(image)
+    hight,width,_ =image.shape
+    for x,a in enumerate(box.splitlines()):
+        if x!=0:
+            a = a.split()
+            if len(a)==12:
+                x,y,w,h = int(a[6]),int(a[7]),int(a[8]),int(a[9])
+                cv2.rectangle(image,(x,y),(w+x,h+y),(255,0,0),3)
+                cv2.putText(image,a[11], (x,y),cv2.FONT_HERSHEY_SIMPLEX,1, (50,50,255),2 )
+    # cv2.imshow("image",image)
+    # cv2.waitKey(0)
+    return string,image
+
+####################################################################################################################################
+
+################################################################################################################################################
 def read_barcodes(img):
     data = None
     myOutput = None
@@ -184,18 +203,22 @@ def text_transverse(text):
     for i in range(len(array)):
         array[i] = array[i].lower()
 
-        array[i] = array[i].replace('"', '')
-        array[i] = array[i].replace(')', '')
-        array[i] = array[i].replace('.','')
-        array[i] = array[i].replace('|','')
-        array[i] = array[i].replace('`', '')
+        string =""
+        for j in array[i]:
+            if (ord(j)>=97 and ord(j)<= 122) or (ord(j)>=48 and ord(j)<= 57 or ord(j) ==32):
+                string = string +j
+        array[i] = string
+
+
         array[i] = array[i].lstrip()
 
 
         for j in range(len(name)):
 
-            if i == name[j]:
-                return dataset.iloc[j],"Real Medicine"
+            if array[i] == name[j]:
+                print(dataset.iloc[j,2])
+                return dataset.iloc[j,2],"Real Medicine",dataset.iloc[j,0]
 
-    return None, "Fake Medicine"
+    print(array)
+    return None, "Fake Medicine",None
 ###############################################################################################################################################

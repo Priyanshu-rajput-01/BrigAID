@@ -3,15 +3,15 @@ from fun_code import *
 
 # load image and converting it to read contours
 while True:
-    img = read_img('18.jpeg')                                                                   # reading image
+    img = read_img('27.jpg')                                                                   # reading image
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # converting it to grey
     img,data,output,bar_code = read_barcodes(img)
     if bar_code != None:
         if data== None:
             print(output)
         else:
-            print(output)
-            print(data)
+            print(output)                                                                         #output
+            print(data)                                                                           #output
 
         break
     else:
@@ -25,19 +25,22 @@ while True:
         points = bounding(contours[con])                                                            # CALLING BOUNDRY FUNCTION
         drawRectangle(img,points, 1)                                                                # CALLING DRAY RECTANGLE FUNCTION
         final = prespective(points, img)
-        bar_code = read_barcodes(img)
         gray2 = cv2.cvtColor(final, cv2.COLOR_BGR2GRAY)
-        st,im = thresh1(gray2)
-        array,text = text_transverse(st)
-        if array == None:
+        string_text, image = thresh1(gray2)
+        array, text, name = text_transverse(string_text)
+
+
+        if array == None:                                                             #printing output
 
             print(text)
         else:
             print(text)
-            print(array[0])
-            print(array[2])
-        cv2.imshow("data", im)
+            print("medicine name ",name)
+            print(array)
+
+        cv2.imshow("data", image)
         k = cv2.waitKey(10)
         if k == 27:
             break
+
 
