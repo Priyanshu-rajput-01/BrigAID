@@ -5,6 +5,7 @@ import numpy
 import cv2
 import base64
 import logging
+from fun_code import main as infer_medicine
 
 
 log = logging.getLogger(__name__)
@@ -26,7 +27,8 @@ def predict_medicine():
     JSON Response
     {
         "authentic" : <bool>,
-        "data" : <some text about the medicine>
+        "name" : <medicine name text>
+        "description" : <text description about the medicine>
     }
     """
 
@@ -40,15 +42,12 @@ def predict_medicine():
     img = cv2.imdecode(npimg, cv2.IMREAD_UNCHANGED)
 
     # Run inference tasks here
-    # results = infer(img)
+    authentic, med_name, med_description = infer_medicine(img)
 
-    # Testing code for image parsing
-    retval, img_buffer = cv2.imencode(".jpg", img)
-    log.debug("Return Val : %s \n Output : %s", retval, img_buffer)
-
-    # Return same image as input
-    response = make_response(bytes(img_buffer))
-    response.headers["Content-Type"] = "image/jpeg"
-
-    return response
-    # return jsonify({"image": base64.b64encode(img_buffer).decode("utf-8")})
+    return jsonify(
+        {
+            "authentic": authentic,
+            "name": med_name,
+            "description": med_description,
+        }
+    )
