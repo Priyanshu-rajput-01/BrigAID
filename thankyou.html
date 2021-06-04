@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>BrigAID.com</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+
+  <link rel="stylesheet" href="css/aos.css">
+
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+  <div class="site-wrap">
+
+
+    <div class="site-navbar py-2">
+
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="index.html" class="js-logo-clone"><strong class="text-primary text-capitalize">Brig</strong>AID</a>
+            </div>
+          </div>
+          <div class="main-nav d-none d-lg-block">
+            <nav class="site-navigation text-right  text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <li><a href="index.html">Home</a></li>
+               
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+            </nav>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong
+              class="text-black">Image Scan</strong></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="site-section">
+      <div class="container" >
+        <div class="row">
+          <div class="col-md-12 text-center" id="scan">
+            <h2 class="display-3 text-black"></h2>
+            <p class="lead mb-5 text-dark" >Choose image which you want to scan</p>
+            <form action="" >
+              
+            <input type="file" id="file" accept="image/*" onchange="loadImage(event)">
+          </form>
+            <p><button class="btn btn-md height-auto px-4 py-3 btn-primary my-5" onclick='run()'>Scan Now</button></p>
+          </div>
+          <div id="real" style='display:none;'>  
+            <div class="d-flex">
+            <figure style="border:3px solid green">
+            <img src="images\Betaloc 25mg Tablet 30 SA.jpg" alt="" style="width:500px; height:300px; " class=" d-block text-center" >
+          </figure>
+          <div  style='display:flex; flex-direction:column;'>
+          <div>   
+            <table class="mx-5 my-5 table-bordered ">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+            <tr>
+              <th>  Name</td>
+              <td>Betaloc 25mg tablet</td>
+            </tr>
+            <tr><th>Bar Code Number</td><td> 89000000000</td></tr>
+            <tr><th>Prescribed for:</td><td style="width:500px; height:auto;">
+              Hypertension, Angina, Arrhythmia, Heart attack and Migraine</td></tr>
+          </table>
+        </div>
+          <h2 class='text-success text-center'> Real Medicine</h2>  
+          </div>
+        </div>
+        </div>
+        <div id="fake" style='display:none;'>
+          <div class="d-flex">
+            <figure style="border:3px solid green">
+            <img src="images\forxiga-10mg-tablet-500x500.png" alt="" style="width:500px; height:300px; " class=" d-block text-center" >
+          </figure>
+          <h2 class='text-danger text-center ' style="position:relative; top:100px;width:700px;">Fake Medicine</h2>  
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+
+            <div class="block-7">
+              <h3 class="footer-heading mb-4">About <strong class="text-primary">BrigAID</strong></h3>
+              <p>A website which is used to downsize the development and use of duplicate medicine using the openCV &
+                Pytesseract </p>
+            </div>
+
+          </div>
+          <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
+            <h3 class="footer-heading mb-4">Navigation</h3>
+            <ul class="list-unstyled">
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Team Member</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="block-5 mb-5">
+              <h3 class="footer-heading mb-4">Contact Info</h3>
+              <ul class="list-unstyled">
+
+                <li class="phone"><a href="tel://+919871348643">+91 9871348643</a></li>
+                <li class="email">20bcs012@nith.ac.in</li>
+              </ul>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/app.js"></script>
+
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
