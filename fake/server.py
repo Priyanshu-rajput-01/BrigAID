@@ -1,6 +1,4 @@
 from flask import Flask, jsonify, request
-from flask.helpers import make_response
-from flask.wrappers import Response
 import numpy
 import cv2
 import base64
