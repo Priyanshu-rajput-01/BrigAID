@@ -2,12 +2,49 @@ import numpy as np
 import cv2
 import pytesseract
 from pyzbar.pyzbar import decode
+import pandas as pd
+dataset = pd.read_csv("Database.csv")
+code = dataset.iloc[:,1]
+name = dataset.iloc[:,0]
+
 
 pytesseract.pytesseract.tesseract_cmd = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
 
+################################################################################################################################################
+def main(img_path):
+    img = read_img(img_path)                                                                        # reading image                                                
+    img,data,output,bar_code = read_barcodes(img)
+    if bar_code != None:
+        if data== None: 
+            return output                                                                           #returning output
+        else:
 
-with open("data.txt") as f:
-    myDataList = f.read().splitlines()
+            return output,data                                                                      #returning output
+    else:
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                                # converting it to grey
+        ret, thresh = cv2.threshold(gray, 1000, 200, cv2.THRESH_OTSU, cv2.THRESH_BINARY)            # appling threshold
+        imgContours = img.copy()                                                                    # COPY IMAGE FOR DISPLAY PURPOSES
+        contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)  # FIND ALL CONTOURS
+        
+        # CALLING FUNCTIONS
+
+        con = max_contours(contours)                                                                # CALLING CUT FUNCTION
+        cv2.drawContours(imgContours, contours, con, (0, 255, 0), 5)                                # DRAW ALL DETECTED CONTOURS
+        points = bounding(contours[con])                                                            # CALLING BOUNDRY FUNCTION
+        drawRectangle(img,points, 1)                                                                # CALLING DRAY RECTANGLE FUNCTION
+        final = prespective(points, img)
+        gray2 = cv2.cvtColor(final, cv2.COLOR_BGR2GRAY)
+        string_text, image = thresh1(gray2)
+        array, text, name = text_transverse(string_text)
+
+        if array == None:                                                                         
+            return text                                                                             #returning output
+        else:
+            return text,name,array                                                                  #returning output
+
+
+################################################################################################################################################
+
 ################################################################################################################################################
 def read_img(path):
     img = cv2.imread(path)
@@ -34,6 +71,7 @@ def max_contours(contours):
 ################################################################################################################################################
 
 ################################################################################################################################################
+
 def bounding(con):
     array = []
     for i in range(len(con)):
@@ -109,23 +147,50 @@ def decord_text(img):
 ################################################################################################################################################
 
 ################################################################################################################################################
+def decord_text_color(img):
+    image = img
+    box = pytesseract.image_to_data(image)
+    string =pytesseract.image_to_string(image)
+    hight,width,_ =image.shape
+    for x,a in enumerate(box.splitlines()):
+        if x!=0:
+            a = a.split()
+            if len(a)==12:
+                x,y,w,h = int(a[6]),int(a[7]),int(a[8]),int(a[9])
+                cv2.rectangle(image,(x,y),(w+x,h+y),(255,0,0),3)
+                cv2.putText(image,a[11], (x,y),cv2.FONT_HERSHEY_SIMPLEX,1, (50,50,255),2 )
+    # cv2.imshow("image",image)
+    # cv2.waitKey(0)
+    return string,image
+
+####################################################################################################################################
+
+################################################################################################################################################
 def read_barcodes(img):
+    data = None
+    myOutput = None
+    myData = None
     for barcode in decode(img):
         myData = barcode.data.decode("utf-8")
+        myData = str(myData)
         print(myData)
-        if myData in myDataList:
-            myOutput = "Real Medicine"
-            myColor = (0, 255, 0)
-        else:
-            myOutput = "Fake Medicine"
-            myColor = (0, 0, 255)
+        for i in range(len(code)):
+
+            if myData == str(int(code[i])):
+                myOutput = "Real Medicine"
+                data = dataset.iloc[i,2]
+                myColor = (0, 255, 0)
+            else:
+                myOutput = "Fake Medicine"
+                data = None
+                myColor = (0, 0, 255)
         pts = np.array([barcode.polygon], np.int32)
         pts = pts.reshape((-1, 1, 2))
         cv2.polylines(img, [pts], True, myColor, 5)
         pts2 = barcode.rect
         cv2.putText(img, myOutput, (pts2[0], pts2[1]), cv2.FONT_HERSHEY_SIMPLEX,
                     0.9, myColor, 2)
-    return img
+    return img,data,myOutput,myData
 ###############################################################################################################################################
 
 
@@ -169,11 +234,27 @@ def text_transverse(text):
                 break
     for i in array2:
         array.remove(i)
+    for i in range(len(array)):
+        array[i] = array[i].lower()
+
+        string =""
+        for j in array[i]:
+            if (ord(j)>=97 and ord(j)<= 122) or (ord(j)>=48 and ord(j)<= 57 or ord(j) ==32):
+                string = string +j
+        array[i] = string
 
 
-    return array
+        array[i] = array[i].lstrip()
 
 
+        for j in range(len(name)):
 
+            if array[i] == name[j]:
+                print(dataset.iloc[j,2])
+                return dataset.iloc[j,2],"Real Medicine",dataset.iloc[j,0]
 
+    print(array)
+    return None, "Fake Medicine",None
 ###############################################################################################################################################
+a,b,c = main('12.jpeg')
+print(a,b,c)
