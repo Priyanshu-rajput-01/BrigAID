@@ -31,7 +31,7 @@ def predict_medicine():
     """
 
     # read image file string data
-    filestr = request.files["image"].read()
+    filestr = request.files["medicine_image"].read()
 
     # convert image string data to numpy array
     npimg = numpy.fromstring(filestr, numpy.uint8)
