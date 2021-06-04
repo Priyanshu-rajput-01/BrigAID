@@ -38,7 +38,7 @@
 
 ----------------------------------------------------------------------------------------------------------------------------
 
-## Contributers
+## Contributors
 1. Priyanshu Rajput
 2. Praveen Kumar Yadav
 3. Prashant Kumar Bhaiya
