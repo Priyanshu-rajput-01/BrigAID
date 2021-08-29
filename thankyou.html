@@ -69,9 +69,8 @@
           <div class="col-md-12 text-center" id="scan">
             <h2 class="display-3 text-black"></h2>
             <p class="lead mb-5 text-dark" >Choose image which you want to scan</p>
-            <form action="" >
-              
-            <input type="file" id="file" accept="image/*" onchange="loadImage(event)">
+          <form action="/predict">
+            <input type="file" id="medicine_image" accept="image/*" onchange="loadImage(event)">
           </form>
             <p><button class="btn btn-md height-auto px-4 py-3 btn-primary my-5" onclick='run()'>Scan Now</button></p>
           </div>
